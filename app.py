@@ -139,9 +139,9 @@ if button:
     "
 
     Com base nisso, minha solicitação é a seguinte:
-    Persona: {persona}
-    Tarefa: {tarefa}
-    Formato da resposta desejada: {formato}
+    "Imagine que voce é um(a) {persona} e sua tarefa é {tarefa} e quero que o formato da resposta seja {formato}"
+    
+    Responda em Português.
     '''
 
     system_prompt = """
