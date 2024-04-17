@@ -112,10 +112,11 @@ button = st.button('Enviar')
 
 if button:
 
-    prompt = f'''Você é um gerador de intruções para o chatGPT. Sua tarefa é criar um prompt personalizado com base nas informações fornecidas, e não realizar a tarefa em si. 
+    prompt = f'''Você é um gerador de intruções para o chatGPT. Sua tarefa é criar um prompt personalizado para o usuário com base nas informações fornecidas, e não realizar a tarefa em si. 
     Por exemplo, se a persona for "Meu chefe", a tarefa for "enviar um email para o cliente sobre um atraso no projeto" e o formato for "deve retornar 3 opções de email para enviar ao cliente", sua tarefa seria criar um prompt assim:
     "Imagine que você é meu chefe e precisa enviar um email a um cliente explicando um atraso no projeto devido a problemas técnicos imprevistos. Retorne o resultado em um formato que possa ser usado para criar 3 opções de emails para enviar ao cliente."
-    Agora, com base nesse exemplo, quero que você crie um prompt em português e detalhado com os seguintes detalhes: Aja como "{persona}", Crie um "{tarefa}", Me traga em forma de "{formato}". MAS SEM ASPAS'''
+    Agora, com base nesse exemplo, quero que você crie um prompt em português e detalhado com os seguintes detalhes para o usuário: Aja como {persona}, sua tarefa é {tarefa}, me traga o resultado em forma de {formato}. 
+    NÃO EXECUTE A TAREFA, APENAS CRIE O PROMPT'''
 
     system_prompt = """
     Seja criativo e detalhado, e gere um prompt que o usuário possa copiar e colar no chatGPT para ter uma resposta relevante e coerente.
@@ -124,7 +125,6 @@ if button:
     """
 
     with st.spinner('Processando...'):
-        #result, error = call_mistral_api(prompt, temperature, system_prompt, max_length)
         try:
             output = client.run(
             "mistralai/mixtral-8x7b-instruct-v0.1",
@@ -137,29 +137,12 @@ if button:
                 })
             
             output = "".join(output)
-            
-            # output = "" 
-            # for event in client.stream( "mistralai/mixtral-8x7b-instruct-v0.1", 
-            #                         input={ "prompt": prompt, 
-            #                                 "temperature": temperature, 
-            #                                 "system_prompt": system_prompt, 
-            #                                 "max_new_tokens": max_length, 
-            #                                 "prompt_template": "<s>[INST] {prompt} [/INST]" 
-            #                                 }, ):
-            #     output += str(event) 
-            
+        
             st.subheader('🎉 Prompt gerado com sucesso 🎉')
             st.markdown(f'\n {output} \n')
         
         except Exception as e:
             st.error(f"Erro ao chamar a API: {e}")
-
-    # if error:
-    #     st.error(f"Erro ao chamar a API: {error}")
-
-    # elif result:
-    #     st.subheader('🎉 Prompt gerado com sucesso 🎉')
-    #     st.markdown(f'\n {result} \n')
 
 reseta = st.button('Resetar sessão')
 
