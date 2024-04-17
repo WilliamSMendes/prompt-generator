@@ -136,6 +136,18 @@ if button:
                     "prompt_template": "<s>[INST] {prompt} [/INST]"
                 })
             
+            output = "".join(output)
+            
+            # output = "" 
+            # for event in client.stream( "mistralai/mixtral-8x7b-instruct-v0.1", 
+            #                         input={ "prompt": prompt, 
+            #                                 "temperature": temperature, 
+            #                                 "system_prompt": system_prompt, 
+            #                                 "max_new_tokens": max_length, 
+            #                                 "prompt_template": "<s>[INST] {prompt} [/INST]" 
+            #                                 }, ):
+            #     output += str(event) 
+            
             st.subheader('🎉 Prompt gerado com sucesso 🎉')
             st.markdown(f'\n {output} \n')
         
