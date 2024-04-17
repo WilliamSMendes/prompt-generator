@@ -112,19 +112,46 @@ button = st.button('Enviar')
 
 if button:
 
-    prompt = f'''Você é um gerador de intruções para o chatGPT. Sua tarefa é criar um prompt personalizado para o usuário com base nas informações fornecidas, e não realizar a tarefa em si. 
-    Por exemplo, se a persona for "Meu chefe", a tarefa for "enviar um email para o cliente sobre um atraso no projeto" e o formato for "deve retornar 3 opções de email para enviar ao cliente", sua tarefa seria criar um prompt assim:
-    "Imagine que você é meu chefe e precisa enviar um email a um cliente explicando um atraso no projeto devido a problemas técnicos imprevistos. Retorne o resultado em um formato que possa ser usado para criar 3 opções de emails para enviar ao cliente."
-    Agora, com base nesse exemplo, quero que você crie um prompt em português e detalhado com os seguintes detalhes para o usuário: Aja como {persona}, sua tarefa é {tarefa}, me traga o resultado em forma de {formato}. 
-    NÃO EXECUTE A TAREFA, APENAS CRIE O PROMPT'''
+    # prompt = f'''Você é um gerador de intruções para o chatGPT. Sua tarefa é criar um prompt personalizado com base nas informações fornecidas, e não realizar a tarefa em si. 
+    # Por exemplo, se a persona for "Meu chefe", a tarefa for "enviar um email para o cliente sobre um atraso no projeto" e o formato for "deve retornar 3 opções de email para enviar ao cliente", sua tarefa seria criar um prompt assim:
+    # "Imagine que você é meu chefe e precisa enviar um email a um cliente explicando um atraso no projeto devido a problemas técnicos imprevistos. Retorne o resultado em um formato que possa ser usado para criar 3 opções de emails para enviar ao cliente."
+    # Agora, com base nesse exemplo, quero que você crie um prompt em português e detalhado com os seguintes detalhes: Aja como "{persona}", Crie um "{tarefa}", Me traga em forma de "{formato}". MAS SEM ASPAS'''
 
+    prompt = f'''
+    Você é um especialista em Criação de Prompt.
+    Seu objetivo é me ajudar a criar o melhor prompt possível para o que preciso.
+
+    O prompt que você fornecer deve ser escrito a partir da minha perspectiva (usuário), fazendo a solicitação ao ChatGPT.
+
+    Considere em sua criação que esse prompt será inserido em uma interface para GPT3, GPT4 ou ChatGPT. Esse será o processo:
+
+    Você irá gerar as seguintes seções:
+
+    "
+    Prompt:
+    (Forneça o melhor prompt possível de acordo com minha solicitação)
+
+    Crítica:
+    (Forneça um parágrafo conciso sobre como melhorar o prompt. Seja muito crítico em sua resposta. Esta seção destina-se a forçar a crítica construtiva, mesmo quando o prompt é aceitável. Quaisquer suposições e/ou problemas devem ser incluídos)
+
+    Perguntas:
+    (faça quaisquer perguntas relacionadas a quais informações adicionais são necessárias de mim para melhorar o prompt (máximo de 3). Se o prompt precisar de mais esclarecimentos ou detalhes em determinadas áreas, faça perguntas para obter mais informações para incluir no prompt)
+    "
+
+    Com base nisso, minha solicitação é a seguinte:
+    Persona: {persona}
+    Tarefa: {tarefa}
+    Formato da resposta desejada: {formato}
+    '''
+
+    # Seja criativo e detalhado, e gere um prompt que o usuário possa copiar e colar no chatGPT para ter uma resposta relevante e coerente.
+    # NÃO EXECUTE A TAREFA, APENAS CRIE O PROMPT.
     system_prompt = """
-    Seja criativo e detalhado, e gere um prompt que o usuário possa copiar e colar no chatGPT para ter uma resposta relevante e coerente.
-    NÃO EXECUTE A TAREFA, APENAS CRIE O PROMPT.
-    RESPONDA SEMPRE EM PORTUGUÊS.
+    RESPONDA SEMPRE EM PORTUGUÊS
     """
 
     with st.spinner('Processando...'):
+        #result, error = call_mistral_api(prompt, temperature, system_prompt, max_length)
         try:
             output = client.run(
             "mistralai/mixtral-8x7b-instruct-v0.1",
@@ -137,12 +164,29 @@ if button:
                 })
             
             output = "".join(output)
-        
+            
+            # output = "" 
+            # for event in client.stream( "mistralai/mixtral-8x7b-instruct-v0.1", 
+            #                         input={ "prompt": prompt, 
+            #                                 "temperature": temperature, 
+            #                                 "system_prompt": system_prompt, 
+            #                                 "max_new_tokens": max_length, 
+            #                                 "prompt_template": "<s>[INST] {prompt} [/INST]" 
+            #                                 }, ):
+            #     output += str(event) 
+            
             st.subheader('🎉 Prompt gerado com sucesso 🎉')
             st.markdown(f'\n {output} \n')
         
         except Exception as e:
             st.error(f"Erro ao chamar a API: {e}")
+
+    # if error:
+    #     st.error(f"Erro ao chamar a API: {error}")
+
+    # elif result:
+    #     st.subheader('🎉 Prompt gerado com sucesso 🎉')
+    #     st.markdown(f'\n {result} \n')
 
 reseta = st.button('Resetar sessão')
 
