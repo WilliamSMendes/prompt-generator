@@ -24,24 +24,23 @@ client = replicate.Client(api_token=api_key)
 st.set_page_config(page_title="💬 Gerador de Prompts")
 
 # Function to call the API
-@st.cache_data(show_spinner=False, ttl=300)
-def call_mistral_api(prompt, temperature, system, max_length):
-    try:
-        output = ""
-        for event in client.stream(
-            "mistralai/mixtral-8x7b-instruct-v0.1",
-            input={
-                "prompt": prompt,
-                "temperature": temperature,
-                "system_prompt": system,
-                "max_new_tokens": max_length,
-                "prompt_template": "<s>[INST] {prompt} [/INST]"
-            },
-        ):
-            output += str(event)
-        return output, None
-    except Exception as e:
-        return None, str(e)
+# @st.cache_data(show_spinner=False, ttl=300)
+# def call_mistral_api(prompt, temperature, system, max_length):
+#     try:
+#         output = replicate.run(
+#         #"replicate-internal/mixtral-instruct-v0.1-fp16-triton-sm80:63888b8acf98421eb6ec992180ef3fbd2510f2ab18fcf368e76b13ccaf16d308",
+#         "mistralai/mixtral-8x7b-instruct-v0.1",
+#         input={
+#                 "prompt": prompt,
+#                 "temperature": temperature,
+#                 "system_prompt": system,
+#                 "max_new_tokens": max_length,
+#                 "prompt_template": "<s>[INST] {prompt} [/INST]"
+#             })
+#         return output, None
+    
+#     except Exception as e:
+#         return None, str(e)
 
 # Function to reset the session state
 def clear_cache():
@@ -125,14 +124,30 @@ if button:
     """
 
     with st.spinner('Processando...'):
-        result, error = call_mistral_api(prompt, temperature, system_prompt, max_length)
+        #result, error = call_mistral_api(prompt, temperature, system_prompt, max_length)
+        try:
+            output = replicate.run(
+            "mistralai/mixtral-8x7b-instruct-v0.1",
+            input={
+                    "prompt": prompt,
+                    "temperature": temperature,
+                    "system_prompt": system_prompt,
+                    "max_new_tokens": max_length,
+                    "prompt_template": "<s>[INST] {prompt} [/INST]"
+                })
+            
+            st.subheader('🎉 Prompt gerado com sucesso 🎉')
+            st.markdown(f'\n {output} \n')
+        
+        except Exception as e:
+            st.error(f"Erro ao chamar a API: {e}")
 
-    if error:
-        st.error(f"Erro ao chamar a API: {error}")
+    # if error:
+    #     st.error(f"Erro ao chamar a API: {error}")
 
-    elif result:
-        st.subheader('🎉 Prompt gerado com sucesso 🎉')
-        st.markdown(f'\n {result} \n')
+    # elif result:
+    #     st.subheader('🎉 Prompt gerado com sucesso 🎉')
+    #     st.markdown(f'\n {result} \n')
 
 reseta = st.button('Resetar sessão')
 
