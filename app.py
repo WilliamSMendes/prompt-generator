@@ -142,7 +142,7 @@ if button:
     "
 
     Com base nisso, minha solicitação é a seguinte:
-    "Imagine que voce é um(a) {persona} e sua tarefa é {tarefa} e quero que o formato da resposta seja {formato}"
+    "ChatGPT, eu quero que você aja como um(a) {persona} e sua tarefa é criar um(a) {tarefa} e me traga a resposta em formato de {formato}"
     
     Responda em Português.
     '''
