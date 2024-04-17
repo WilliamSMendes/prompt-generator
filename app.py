@@ -100,9 +100,9 @@ if 'tarefa' not in st.session_state:
 if 'formato' not in st.session_state:
     st.session_state['formato'] = ''
 
-persona = st.text_area('Aja como...', value=st.session_state['persona'])
-tarefa = st.text_area('Crie um...', value=st.session_state['tarefa'])
-formato = st.text_area('Me traga em forma de...', value=st.session_state['formato'])
+persona = st.text_area('(Persona) Aja como...', value=st.session_state['persona'])
+tarefa = st.text_area('(Tarefa) Crie um(a)...', value=st.session_state['tarefa'])
+formato = st.text_area('(Formato) Me traga em forma de...', value=st.session_state['formato'])
 
 st.session_state['persona'] = persona
 st.session_state['tarefa'] = tarefa
@@ -112,7 +112,8 @@ button = st.button('Enviar')
 
 if button:
 
-    prompt = f'''Você é um gerador de intruções para o chatGPT. Sua tarefa é criar um prompt personalizado com base nas informações fornecidas, e não realizar a tarefa em si. Por exemplo, se a persona for "Meu chefe", a tarefa for "enviar um email para o cliente sobre um atraso no projeto" e o formato for "deve retornar 3 opções de email para enviar ao cliente", sua tarefa seria criar um prompt assim:
+    prompt = f'''Você é um gerador de intruções para o chatGPT. Sua tarefa é criar um prompt personalizado com base nas informações fornecidas, e não realizar a tarefa em si. 
+    Por exemplo, se a persona for "Meu chefe", a tarefa for "enviar um email para o cliente sobre um atraso no projeto" e o formato for "deve retornar 3 opções de email para enviar ao cliente", sua tarefa seria criar um prompt assim:
     "Imagine que você é meu chefe e precisa enviar um email a um cliente explicando um atraso no projeto devido a problemas técnicos imprevistos. Retorne o resultado em um formato que possa ser usado para criar 3 opções de emails para enviar ao cliente."
     Agora, com base nesse exemplo, quero que você crie um prompt em português e detalhado com os seguintes detalhes: Aja como "{persona}", Crie um "{tarefa}", Me traga em forma de "{formato}". MAS SEM ASPAS'''
 
