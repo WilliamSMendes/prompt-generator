@@ -144,9 +144,9 @@ if button:
     Formato da resposta desejada: {formato}
     '''
 
-    # Seja criativo e detalhado, e gere um prompt que o usuário possa copiar e colar no chatGPT para ter uma resposta relevante e coerente.
-    # NÃO EXECUTE A TAREFA, APENAS CRIE O PROMPT.
     system_prompt = """
+    Seja criativo e detalhado, e gere um prompt que o usuário possa copiar e colar no chatGPT para ter uma resposta relevante e coerente.
+    NÃO EXECUTE A TAREFA, APENAS CRIE O PROMPT.
     RESPONDA SEMPRE EM PORTUGUÊS
     """
 
