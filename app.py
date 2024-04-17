@@ -131,10 +131,10 @@ if button:
     Prompt:
     (Forneça o melhor prompt possível de acordo com minha solicitação)
 
-    Crítica:
+    Sugestão de como melhorar seu prompt:
     (Forneça um parágrafo conciso sobre como melhorar o prompt. Seja muito crítico em sua resposta. Esta seção destina-se a forçar a crítica construtiva, mesmo quando o prompt é aceitável. Quaisquer suposições e/ou problemas devem ser incluídos)
 
-    Perguntas:
+    Aqui estão algumas perguntas que podem ajudar a enriquecer seu prompt:
     (faça quaisquer perguntas relacionadas a quais informações adicionais são necessárias de mim para melhorar o prompt (máximo de 3). Se o prompt precisar de mais esclarecimentos ou detalhes em determinadas áreas, faça perguntas para obter mais informações para incluir no prompt)
     "
 
