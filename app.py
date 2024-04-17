@@ -126,7 +126,7 @@ if button:
     with st.spinner('Processando...'):
         #result, error = call_mistral_api(prompt, temperature, system_prompt, max_length)
         try:
-            output = replicate.run(
+            output = client.run(
             "mistralai/mixtral-8x7b-instruct-v0.1",
             input={
                     "prompt": prompt,
