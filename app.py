@@ -147,10 +147,18 @@ if button:
     Responda em Português.
     '''
 
+    # system = """
+    # Seja criativo e detalhado, e gere um prompt que o usuário possa copiar e colar no chatGPT para ter uma resposta relevante e coerente.
+    # NÃO EXECUTE A TAREFA, APENAS CRIE O PROMPT.
+    # RESPONDA SEMPRE EM PORTUGUÊS
+    # """
+
     system_prompt = """
+    <|begin_of_text|><|start_header_id|>system<|end_header_id|>
     Seja criativo e detalhado, e gere um prompt que o usuário possa copiar e colar no chatGPT para ter uma resposta relevante e coerente.
     NÃO EXECUTE A TAREFA, APENAS CRIE O PROMPT.
-    RESPONDA SEMPRE EM PORTUGUÊS
+    RESPONDA SEMPRE EM PORTUGUÊS<|eot_id|><|start_header_id|>user<|end_header_id|>
+    {prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
     """
 
     with st.spinner('Processando...'):
@@ -158,13 +166,15 @@ if button:
         try:
             output = client.run(
             #"mistralai/mixtral-8x7b-instruct-v0.1",
-            "mistralai/mistral-7b-instruct-v0.2",
+            "meta/meta-llama-3-70b-instruct",
             input={
                     "prompt": prompt,
                     "temperature": temperature,
-                    "system_prompt": system_prompt,
-                    "max_new_tokens": max_length,
-                    "prompt_template": "<s>[INST] {prompt} [/INST]"
+                    #"system_prompt": system_prompt,
+                    #"max_new_tokens": max_length,
+                    "max_tokens": max_length,
+                    #"prompt_template": "<s>[INST] {prompt} [/INST]"
+                    "prompt_template": system_prompt
                 })
             
             output = "".join(output)
