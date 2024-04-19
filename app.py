@@ -162,8 +162,8 @@ if button:
             input={
                     "prompt": prompt,
                     "temperature": temperature,
-                    "system_prompt": system_prompt,
-                    "max_new_tokens": max_length,
+                    #"system_prompt": system_prompt,
+                    #"max_new_tokens": max_length,
                     "prompt_template": "<s>[INST] {prompt} [/INST]"
                 })
             
