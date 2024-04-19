@@ -158,12 +158,12 @@ if button:
         try:
             output = client.run(
             #"mistralai/mixtral-8x7b-instruct-v0.1",
-            "meta/meta-llama-3-70b-instruct",
+            "mistralai/mistral-7b-instruct-v0.2",
             input={
                     "prompt": prompt,
                     "temperature": temperature,
-                    #"system_prompt": system_prompt,
-                    #"max_new_tokens": max_length,
+                    "system_prompt": system_prompt,
+                    "max_new_tokens": max_length,
                     "prompt_template": "<s>[INST] {prompt} [/INST]"
                 })
             
