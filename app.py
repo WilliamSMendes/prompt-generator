@@ -54,7 +54,8 @@ def clear_cache():
 
 # Sidebar
 with st.sidebar:
-    st.title('🧠 Modelo: mixtral-8x7b-instruct-v0.1')
+    #st.title('🧠 Modelo: mixtral-8x7b-instruct-v0.1')
+    st.title('🧠 Modelo: meta-llama-3-70b-instruct')
     st.markdown("Características do modelo:")
     # st.markdown(""" 
     #             - 47 bilhões de parâmetros
