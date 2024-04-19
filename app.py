@@ -157,7 +157,8 @@ if button:
         #result, error = call_mistral_api(prompt, temperature, system_prompt, max_length)
         try:
             output = client.run(
-            "mistralai/mixtral-8x7b-instruct-v0.1",
+            #"mistralai/mixtral-8x7b-instruct-v0.1",
+            "meta/meta-llama-3-70b-instruct",
             input={
                     "prompt": prompt,
                     "temperature": temperature,
