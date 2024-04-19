@@ -56,13 +56,19 @@ def clear_cache():
 with st.sidebar:
     st.title('🧠 Modelo: mixtral-8x7b-instruct-v0.1')
     st.markdown("Características do modelo:")
+    # st.markdown(""" 
+    #             - 47 bilhões de parâmetros
+    #             - Limite de 32k de tokens de vocabulário
+    #             - Supera o GPT-3.5 e Llama 2 em diversas tarefas
+    #             - Resposta 6x mais rapida do que os concorrentes
+    #             - Modelo de código aberto
+    #             - Saber mais: [MistralAI](https://mistral.ai/news/mixtral-of-experts/)""")
     st.markdown(""" 
-                - 47 bilhões de parâmetros
-                - Limite de 32k de tokens de vocabulário
-                - Supera o GPT-3.5 e Llama 2 em diversas tarefas
-                - Resposta 6x mais rapida do que os concorrentes
+                - 70 bilhões de parâmetros
+                - Limite de 128k de tokens de vocabulário
+                - Supera o GPT-4 e Gemini 1.5 em diversas tarefas
                 - Modelo de código aberto
-                - Saber mais: [MistralAI](https://mistral.ai/news/mixtral-of-experts/)""")
+                - Saber mais: [Meta AI](https://about.fb.com/br/news/2024/04/apresentando-meta-llama-3-o-grande-modelo-de-linguagem-de-codigo-aberto-mais-capaz-ate-hoje/)""")
     st.markdown(" ")
     st.subheader('🛠️ Parâmetros do modelo')
     st.markdown(" ")
