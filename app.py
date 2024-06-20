@@ -54,16 +54,8 @@ def clear_cache():
 
 # Sidebar
 with st.sidebar:
-    #st.title('🧠 Modelo: mixtral-8x7b-instruct-v0.1')
     st.title('🧠 Modelo: meta-llama-3-70b-instruct')
     st.markdown("Características do modelo:")
-    # st.markdown(""" 
-    #             - 47 bilhões de parâmetros
-    #             - Limite de 32k de tokens de vocabulário
-    #             - Supera o GPT-3.5 e Llama 2 em diversas tarefas
-    #             - Resposta 6x mais rapida do que os concorrentes
-    #             - Modelo de código aberto
-    #             - Saber mais: [MistralAI](https://mistral.ai/news/mixtral-of-experts/)""")
     st.markdown(""" 
                 - 70 bilhões de parâmetros
                 - Limite de 128k de tokens de vocabulário
@@ -169,32 +161,18 @@ if button:
     """
 
     with st.spinner('Processando...'):
-        #result, error = call_mistral_api(prompt, temperature, system_prompt, max_length)
         try:
             output = client.run(
-            #"mistralai/mixtral-8x7b-instruct-v0.1",
             "meta/meta-llama-3-70b-instruct",
             input={
                     "prompt": prompt,
                     "temperature": temperature,
-                    #"system_prompt": system_prompt,
-                    #"max_new_tokens": max_length,
                     "max_tokens": max_length,
                     #"prompt_template": "<s>[INST] {prompt} [/INST]"
                     "prompt_template": system_prompt
                 })
             
             output = "".join(output)
-            
-            # output = "" 
-            # for event in client.stream( "mistralai/mixtral-8x7b-instruct-v0.1", 
-            #                         input={ "prompt": prompt, 
-            #                                 "temperature": temperature, 
-            #                                 "system_prompt": system_prompt, 
-            #                                 "max_new_tokens": max_length, 
-            #                                 "prompt_template": "<s>[INST] {prompt} [/INST]" 
-            #                                 }, ):
-            #     output += str(event) 
             
             st.subheader('🎉 Prompt gerado com sucesso 🎉')
             st.markdown(f'\n {output} \n')
