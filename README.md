@@ -26,7 +26,7 @@ To run this application locally, follow these steps:
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/yourusername/prompt-generator.git
+    git clone https://github.com/WilliamSMendes/prompt-generator.git
     cd prompt-generator
     ```
 
